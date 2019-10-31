@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<unistd.h>
 #include <term_entry.h>
+#include "log_util.h"
 
 
 char* getCharFromStatiLib(int length);
@@ -17,6 +18,8 @@ int main() {
     pid_t pid;
     char line[MAX_LINE];
 
+    LOGD("hello");
+    printf("%s\n",__func__);
 
     if (pipe(fd) != 0){
         printf("create pipe faile%d\n",errno);

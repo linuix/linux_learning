@@ -7,6 +7,7 @@ set(LIBRARY_OUTPUT_PATH ./build/lib)
 set(EXECUTABLE_OUTPUT_PATH ./build/execute)
 
 add_library(static SHARED static_lib.cpp)
+include_directories(./)
 
 add_executable(main main.cpp)
 
