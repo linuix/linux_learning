@@ -1,0 +1,4 @@
+/mnt/d/code/linux_learning/Storehouse/CMakeFiles/rebuild_cache.dir
+/mnt/d/code/linux_learning/Storehouse/CMakeFiles/static.dir
+/mnt/d/code/linux_learning/Storehouse/CMakeFiles/edit_cache.dir
+/mnt/d/code/linux_learning/Storehouse/CMakeFiles/main.dir

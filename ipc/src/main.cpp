@@ -2,12 +2,13 @@
 #include <iostream>
 #include<stdio.h>
 #include<unistd.h>
-#include <term_entry.h>
+// #include <term_entry.h>
 #include "log_util.h"
 
 
 char* getCharFromStatiLib(int length);
 
+#define MAX_LINE 1024
 
 int main() {
 

@@ -1,0 +1,1 @@
+/usr/bin/g++     CMakeFiles/main.dir/src/main.cpp.o  -o build/execute/main  -Wl,-rpath,/mnt/d/code/linux_learning/Storehouse/build/lib build/lib/libstatic.so 

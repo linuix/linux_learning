@@ -1,0 +1,1 @@
+/usr/bin/g++ -fPIC   -shared -Wl,-soname,libstatic.so -o build/lib/libstatic.so CMakeFiles/static.dir/src/static_lib.cpp.o 

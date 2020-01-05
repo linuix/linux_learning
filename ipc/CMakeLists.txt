@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(LIBRARY_OUTPUT_PATH ./build/lib)
 set(EXECUTABLE_OUTPUT_PATH ./build/execute)
 
-add_library(static SHARED static_lib.cpp)
-include_directories(./)
+add_library(static SHARED src/static_lib.cpp)
+include_directories(./src)
 
-add_executable(main main.cpp)
+add_executable(main src/main.cpp)
 
 link_directories(main ./build/lib)
 
