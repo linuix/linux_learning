@@ -12,7 +12,7 @@ int main()
     char buf[80];
     getcwd(buf, sizeof(buf));
     LOGD("current working directory: %s", buf);
-    void *handle = dlopen("/mnt/d/code/linux_learning/soload/libs/libtestlib.so", RTLD_LAZY);
+    void *handle = dlopen("./libs/libtestlib.so", RTLD_LAZY);
     if (handle)
     {
         LOGD("dlopen success");
