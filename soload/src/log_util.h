@@ -1,6 +1,7 @@
 //
 // Created by link on 19-10-31.
 //
+#include<string.h>
 #define LINUX 0
 #define ANDROID 1
 

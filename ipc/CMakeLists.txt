@@ -1,17 +1,19 @@
 cmake_minimum_required(VERSION 3.9.2)
-project(linux_learning)
+project(mian)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(LIBRARY_OUTPUT_PATH ./build/lib)
-set(EXECUTABLE_OUTPUT_PATH ./build/execute)
+set(LIBRARY_OUTPUT_PATH ./out/lib)
+set(EXECUTABLE_OUTPUT_PATH ./out/execute)
 
-add_library(static SHARED src/static_lib.cpp)
+add_library(testlib SHARED src/static_lib.cpp)
 include_directories(./src)
+
+
+link_directories(main out/lib)
 
 add_executable(main src/main.cpp)
 
-link_directories(main ./build/lib)
 
-target_link_libraries(main static)
+target_link_libraries(main testlib)
 
