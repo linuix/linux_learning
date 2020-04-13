@@ -51,7 +51,7 @@ int main()
         // close(fd[1]);
         n = read(fd[0], buffer, MAX_LINE);
         LOGD("child process read = %s length %d", buffer, n);
-        sleep(3);
+        sleep(5);
 
         write(fd[1], buffer, n);
         LOGD("child process end ");
