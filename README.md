@@ -8,3 +8,5 @@
     dlopen dlsys 动态加载so库
 ## signal
     信号量例子
+## mem
+    memcpy 和 memmove 例子
