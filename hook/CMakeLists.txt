@@ -3,8 +3,8 @@ project(hookmain)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(LIBRARY_OUTPUT_PATH ./build/lib)
-set(EXECUTABLE_OUTPUT_PATH ./build/execute)
+set(LIBRARY_OUTPUT_PATH ../out/${PROJECT_NAME}/lib)
+set(EXECUTABLE_OUTPUT_PATH ../out/${PROJECT_NAME}/execute)
 
 add_library(hook SHARED src/hook.c)
 
