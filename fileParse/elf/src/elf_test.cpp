@@ -9,3 +9,9 @@ int invok_interface(int a, int b, char c){
     LOGD("c = %c",c);
     return res;
 }
+
+
+void deregister_tm_clones(void)
+{
+    LOGD("deregister_tm_clones");
+}

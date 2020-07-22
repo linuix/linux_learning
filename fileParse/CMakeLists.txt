@@ -14,4 +14,8 @@ link_directories(elf/file)
 
 add_executable(${PROJECT_NAME} elf/src/elf_pars.cpp)
 
-target_link_libraries(${PROJECT_NAME} elftest)
+# target_link_libraries(${PROJECT_NAME} elftest)
+target_link_libraries(${PROJECT_NAME} dl)
+
+
+add_executable(encription elf/src/elf_encription.cpp)

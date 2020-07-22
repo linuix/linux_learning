@@ -23,7 +23,7 @@
     elf64_shdr->sh_addr = *(Elf64_Addr *)section_table;       
     memcpy(&elf64_shdr->sh_offset, section_table, 8);
     ```
-    - elf 64位 head 占64字节，32位占40字节 
+    - elf 64位 head 占64字节，32位占52字节 
     
     ### 系统预定义的section name  
     系统预定义了一些节名（以.开头），这些节有其特定的类型和含义。  

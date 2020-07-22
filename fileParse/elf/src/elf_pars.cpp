@@ -4,20 +4,48 @@
 #include <string.h>
 #include <vector>
 #include <log_util.h>
+#include <dlfcn.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 using namespace std;
 
-extern "C" int invok_interface(int a, int b, char c);
+// extern "C" int invok_interface(int a, int b, char c);
+
+typedef int *(*Method)(int, int, char);
 
 void parse_ELF(const char *path);
 Elf64_Ehdr *parse_header(unsigned char *header);
 vector<Elf64_Shdr *> *parse_section_table(unsigned char *section_table, Elf64_Ehdr *elf_ehdr);
+unsigned long getLibAddr(const char* elfName);
 
 int main()
 {
-    // int res = invok_interface(1,2,'a');
 
     parse_ELF("/mnt/d/code/linux_learning/fileParse/elf/file/libelftest.so");
+
+    // int res = invok_interface(1,2,'a');
+    // LOGD("%x",&invok_interface);
+
+    void *hold = dlopen("/mnt/d/code/linux_learning/build/out/elfpars/lib/libelftest.so", RTLD_LAZY);
+    LOGD("hold = %x", hold);
+    LOGD("entry = %x", hold + 0x590);
+    if (hold)
+    {
+
+        Method method1 = (Method)dlsym(hold, "invok_interface");
+        LOGD("method = %X", method1);
+        if (method1)
+        {
+            method1(1, 2, 'a');
+        }
+
+        long addr = getLibAddr("libelftest.so");
+        LOGD("addr = %lX",addr);
+
+        getchar();
+    }
+
     return 1;
 }
 
@@ -279,4 +307,30 @@ vector<Elf64_Shdr *> *parse_section_table(unsigned char *section_table, Elf64_Eh
     }
 
     return elf_shdr_vector;
+}
+
+unsigned long getLibAddr(const char* elfName)
+{
+  unsigned long ret = 0;
+  char buf[4096], *temp;
+  int pid;
+  FILE *fp;
+  pid = getpid();
+  sprintf(buf, "/proc/%d/maps", pid);
+  fp = fopen(buf, "r");
+  if(fp == NULL)
+  {
+    puts("open failed");
+    goto _error;
+  }
+  while(fgets(buf, sizeof(buf), fp)){
+    if(strstr(buf, elfName)){
+      temp = strtok(buf, "-");
+      ret = strtoul(temp, NULL, 16);
+      break;
+    }
+  }
+_error:
+  fclose(fp);
+  return ret;
 }
