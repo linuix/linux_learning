@@ -32,15 +32,16 @@ int main()
     for (size_t j = 0; j < shdr_vector.size(); j++)
     {
         const char *str1 = (char *)&str_tab_text[shdr_vector.at(j).sh_name];
-        int res = strcmp(".text", str1);
+        LOGD("index = %d name index = %4d\tname str = %s", j, shdr_vector.at(j).sh_name, &str_tab_text[shdr_vector.at(j).sh_name]);
+
+        int res = strcmp(".newsec", str1);
         if (res == 0)
         {
-            LOGD("index = %d name index = %4d\tname str = %s", j, shdr_vector.at(j).sh_name, &str_tab_text[shdr_vector.at(j).sh_name]);
             memcpy(&elf_shdr_text, &shdr_vector.at(j), sizeof(elf_shdr_text));
         }
     }
 
-    LOGD("name index = %d ", elf_shdr_text.sh_name);
+    LOGD("name index = %4d\tname str = %s", elf_shdr_text.sh_name, &str_tab_text[elf_shdr_text.sh_name]);
     fseek(fd, elf_shdr_text.sh_offset, SEEK_SET);
     unsigned char section_text_data[elf_shdr_text.sh_size];
     fread(section_text_data, sizeof(section_text_data), 1, fd);
@@ -72,6 +73,15 @@ int main()
     LOGD("length = %d", length);
     fseek(decript_elf_file, elf_shdr_text.sh_offset, SEEK_SET);
     fwrite(section_text_data, elf_shdr_text.sh_size, 1, decript_elf_file);
+
+    //修改elf head
+    ehdr.e_shoff = elf_shdr_text.sh_offset;
+    ehdr.e_shentsize = elf_shdr_text.sh_size;
+    //写入修改后的头
+
+    fseek(decript_elf_file, 0, SEEK_SET);
+    fwrite((const void*)(&ehdr),sizeof(ehdr),1,decript_elf_file);
+
     fflush(decript_elf_file);
     fclose(fd);
     fclose(decript_elf_file);

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-// extern "C" int invok_interface(int a, int b, char c);
+extern "C" int invok_interface(int a, int b, char c);
 
 typedef int *(*Method)(int, int, char);
 
@@ -24,8 +24,8 @@ int main()
 
     parse_ELF("/mnt/d/code/linux_learning/fileParse/elf/file/libelftest.so");
 
-    // int res = invok_interface(1,2,'a');
-    // LOGD("%x",&invok_interface);
+    int res = invok_interface(1,2,'a');
+    LOGD("%x",&invok_interface);
 
     void *hold = dlopen("/mnt/d/code/linux_learning/build/out/elfpars/lib/libelftest.so", RTLD_LAZY);
     LOGD("hold = %x", hold);
